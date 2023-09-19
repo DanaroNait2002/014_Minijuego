@@ -1,0 +1,28 @@
+No más de dos botones
+No más de tres níveles (dos níveles)
+
+----
+Pescar
+Encontrar objetos/personajes
+Esquiva los obstaculos (Nave)
+Suelo que se cae
+Memory
+Memoriza el camino del laberinto (oscuro)
+Pin pong con un timer (Explosivo)
+El intruso
+Cuenta los objetos
+Gran bola de nieve
+Limpia Cristales
+Entregar items concretos
+Huir de algo que te persigue
+Mirar al lado que miran otros
+La patata caliente
+Caminar y esconderte
+
+
+----
+https://www.guiasnintendo.com/2c-switch/super-mario-party/guia-super-mario-party/minijuegos.html
+
+----
+- Van pasando objetos de un lado de la pantalla al otro y el jugador tiene que contar cuando de un tipo han pasado?
+- Mapa esquivando obstaculos (geometry dash)
