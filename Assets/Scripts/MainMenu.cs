@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    //CONTINUAR CAMBIANDO COSAS EN ESTE SCRIPT, LA IDEA ESTA, PERO HAY COSAS QUE HAY QUE CAMBIAR PARA QUE FUNCIONE CORRECTAMENTE
+
     [SerializeField]
     private GameObject canvasMainMenu;
 
@@ -24,8 +26,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private float locationTittle;
 
-
-    [SerializeField]
 
     private void Start()
     {
