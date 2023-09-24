@@ -25,15 +25,23 @@ public class MainMenu : MonoBehaviour
     
     [SerializeField]
     private float locationTittle;
+    [SerializeField]
+    private float[] location;
 
 
     private void Start()
     {
+        LeanTween.init(1800);
+
         canvasMainMenu.SetActive(true);
 
         textTittle.SetActive(true);
 
         locationTittle = textTittle.transform.position.y;
+        location[0] = 0f;
+        location[1] = -150f;
+        location[2] = -300f;
+        location[3] = -450f;
 
         value = 0;
 
@@ -52,7 +60,7 @@ public class MainMenu : MonoBehaviour
             {
                 if (timer >= 1)
                 {
-                    LeanTween.scale(gridButton[value], Vector3.one, 0.5f);
+                    LeanTween.moveLocalY(gridButton[value], location[value], 0.5f);
 
                     value++;
                     timer = 0;
@@ -79,7 +87,7 @@ public class MainMenu : MonoBehaviour
             {
                 if (timer >= 1)
                 {
-                    LeanTween.scale(gridButton[value], Vector3.zero, 0.5f);
+                    LeanTween.moveLocalY(gridButton[value], -1230f, 0.5f);
 
                     value--;
                     timer = 0;
