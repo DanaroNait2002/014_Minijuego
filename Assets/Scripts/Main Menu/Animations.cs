@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class Animations : MonoBehaviour
     private float timer;
     [SerializeField]
     private float timeAnimate;
+    [SerializeField]
+    private float timeMove;
 
     //LOCATIONS
     [SerializeField]
@@ -50,7 +53,9 @@ public class Animations : MonoBehaviour
     [SerializeField]
     private float locationLevelSelection;
     [SerializeField]
-    private float locationOptions;
+    private float[] locationOptions;
+    [SerializeField]
+    private float[] locationOptionsOut;
     [SerializeField]
     private float locationCredits;
 
@@ -89,7 +94,15 @@ public class Animations : MonoBehaviour
         locationMainMenu[2] = -300f;
         locationMainMenu[3] = -450f;
 
+        locationButtonBack = -455f;
+
         locationLevelSelection = -185f;
+
+        locationOptions[0] = -555f;
+        locationOptions[1] = 555f;
+        locationOptionsOut[0] = -1480f;
+        locationOptionsOut[1] = 1480f;
+
 
         //Start Animation
         AnimationMainMenuIn();
@@ -99,12 +112,13 @@ public class Animations : MonoBehaviour
     {
         #region ANIMATION IN
 
-        if (animationMainMenuIn && valueMainMenu >= 0)
+        if (animationMainMenuIn && !animationLevelSelectionOut && !animationOptionsOut)
         {
             Debug.Log("AnimationInMainMenu");
 
             //Move the Tittle
             LeanTween.moveLocalY(textTittle, 336, 1f);
+            LeanTween.moveLocalY(buttonBack, -1230, timeMove);
 
             //Set Timer
             timer += Time.deltaTime;
@@ -114,7 +128,7 @@ public class Animations : MonoBehaviour
                 if (timer >= timeAnimate)
                 {
                     Debug.Log("MOVING" + valueMainMenu);
-                    LeanTween.moveLocalY(gridMainMenu[valueMainMenu], locationMainMenu[valueMainMenu], 0.5f);
+                    LeanTween.moveLocalY(gridMainMenu[valueMainMenu], locationMainMenu[valueMainMenu], timeMove);
 
                     valueMainMenu++;
                     timer = 0;
@@ -130,7 +144,7 @@ public class Animations : MonoBehaviour
                 animationMainMenuIn = false;
             }
         }
-        if (animationLevelSelectionIn && valueLevelSelection >= 0)
+        if (animationLevelSelectionIn && !animationMainMenuOut)
         {
             Debug.Log("AnimationLevelSelectionMenu");
           
@@ -142,9 +156,15 @@ public class Animations : MonoBehaviour
                 if (timer >= timeAnimate)
                 {
                     Debug.Log("MOVING" + valueLevelSelection);
-                    LeanTween.moveLocalY(gridLevelSelection[valueLevelSelection], locationLevelSelection, 0.5f);
 
-                    valueMainMenu++;
+                    if (valueLevelSelection == gridLevelSelection.Length - 1)
+                    {
+                        LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);
+                    }
+
+                    LeanTween.moveLocalY(gridLevelSelection[valueLevelSelection], locationLevelSelection, timeMove);
+
+                    valueLevelSelection++;
                     timer = 0;
                 }
             }
@@ -158,12 +178,45 @@ public class Animations : MonoBehaviour
                 animationLevelSelectionIn = false;
             }
         }
+        if (animationOptionsIn && !animationMainMenuOut)
+        {
+            Debug.Log("AnimationOptions");
+
+            timer += Time.deltaTime;
+
+            if (valueOptions >= 0 && valueOptions <= gridOptions.Length - 1)
+            {
+                if (timer >= timeAnimate)
+                {
+                    Debug.Log("MOVING" + valueOptions);
+
+                    if (valueOptions == gridOptions.Length - 1)
+                    {
+                        LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);
+                    }
+
+                    LeanTween.moveLocalX(gridOptions[valueOptions], locationOptions[valueOptions], timeMove);
+
+                    valueOptions++;
+                    timer = 0;
+                }
+            }
+
+            if (valueOptions > gridOptions.Length - 1)
+            {
+                valueOptions = gridOptions.Length - 1;
+
+                timer = 0;
+
+                animationOptionsIn = false;
+            }
+        }
 
         #endregion
 
         #region ANIMATION OUT
 
-        if (animationMainMenuOut && valueMainMenu <= gridMainMenu.Length - 1)
+        if (animationMainMenuOut)
         {
             timer += Time.deltaTime;
 
@@ -171,7 +224,7 @@ public class Animations : MonoBehaviour
             {
                 if (timer >= timeAnimate)
                 {
-                    LeanTween.moveLocalY(gridMainMenu[valueMainMenu], -1230f, 0.5f);
+                    LeanTween.moveLocalY(gridMainMenu[valueMainMenu], -1230f, timeMove);
 
                     valueMainMenu--;
 
@@ -188,7 +241,56 @@ public class Animations : MonoBehaviour
                 animationMainMenuOut = false;
             }
         }
+        if (animationLevelSelectionOut)
+        {
+            timer += Time.deltaTime;
 
+            if (valueLevelSelection >= 0 && valueLevelSelection <= gridLevelSelection.Length - 1)
+            {
+                if (timer >= timeAnimate)
+                {
+                    LeanTween.moveLocalY(gridLevelSelection[valueLevelSelection], -1230f, timeMove);
+
+                    valueLevelSelection--;
+
+                    timer = 0;
+                }
+            }
+
+            if (valueLevelSelection < 0)
+            {
+                valueLevelSelection = 0;
+
+                timer = 0;
+
+                animationLevelSelectionOut = false;
+            }
+        }
+        if (animationOptionsOut)
+        {
+            timer += Time.deltaTime;
+
+            if (valueOptions >= 0 && valueOptions <= gridOptions.Length - 1)
+            {
+                if (timer >= timeAnimate)
+                {
+                    LeanTween.moveLocalX(gridOptions[valueOptions], locationOptionsOut[valueOptions], timeMove);
+
+                    valueOptions--;
+
+                    timer = 0;
+                }
+            }
+
+            if (valueOptions < 0)
+            {
+                valueOptions = 0;
+
+                timer = 0;
+
+                animationOptionsOut = false;
+            }
+        }
         #endregion
     }
 

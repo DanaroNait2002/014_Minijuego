@@ -293,7 +293,7 @@ public class MainMenu : MonoBehaviour
         animationInOptions = true;
     }
 
-    public void AnimationOutOptions()ti
+    public void AnimationOutOptions()
     {
         animationOutOptions = true;
     }
