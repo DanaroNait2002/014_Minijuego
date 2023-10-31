@@ -110,7 +110,7 @@ public class Animations : MonoBehaviour
     {
         #region ANIMATION IN
 
-        if (animationMainMenuIn && !animationLevelSelectionOut && !animationOptionsOut)
+        if (animationMainMenuIn && !animationLevelSelectionOut && !animationOptionsOut && !animationCreditsOut)
         {
             Debug.Log("AnimationInMainMenu");
 

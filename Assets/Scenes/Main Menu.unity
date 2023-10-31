@@ -3018,13 +3018,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670290520}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1019947427764966855}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 880, y: -914.5}
@@ -7223,7 +7223,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1148711139307791971}
+  m_TargetGraphic: {fileID: 1840568627}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7763,7 +7763,7 @@ MonoBehaviour:
   - {fileID: 1462239641}
   - {fileID: 918540201}
   - {fileID: 545376861}
-  - {fileID: 670290520}
+  - {fileID: 0}
   valueMainMenu: 0
   valueLevelSelection: 0
   valueOptions: 0
@@ -8751,7 +8751,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1148711139307791971}
+  m_TargetGraphic: {fileID: 7166055994287427838}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -9365,7 +9365,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1148711139307791971}
+  m_TargetGraphic: {fileID: 8302913042967957404}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
