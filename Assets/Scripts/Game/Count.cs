@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static UnityEngine.UI.Image;
+using UnityEngine.LowLevel;
 
 public class Count : MonoBehaviour
 {
@@ -9,6 +11,17 @@ public class Count : MonoBehaviour
     private int count;
     [SerializeField]
     private int amount;
+    [SerializeField] 
+    private int value;
+    [SerializeField] 
+    private GameObject[] objectType;
+    [SerializeField] 
+    private Vector2 location;
+
+    [SerializeField]
+    private float timer;
+    [SerializeField]
+    private TextMeshProUGUI textTimer;
 
     [SerializeField]
     private TextMeshProUGUI text;
@@ -29,9 +42,13 @@ public class Count : MonoBehaviour
     private GameObject checkerButton;
     [SerializeField]
     private GameObject retryButton;
+    [SerializeField]
+    private GameObject nextLevelButton;
 
-    public void Start()
+    public void Awake()
     {
+        location = new Vector2(0f, 1.75f);
+
         count = 0;
         text.text = (count.ToString());
 
@@ -39,28 +56,56 @@ public class Count : MonoBehaviour
         close.SetActive(false);
         lost.SetActive(false);
 
+        checkerButton.SetActive(true);
+        retryButton.SetActive(false);
+
         amount = GameObject.Find("Spawner").GetComponent<Spawner>().amount;
+
+        value = GameObject.Find("Spawner").GetComponent<Spawner>().value;
+        Instantiate(objectType[value], location, Quaternion.identity);
+
+        timer = 15f;
     }
 
     public void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            count++;
+        timer -= Time.deltaTime;
+        textTimer.text = timer.ToString("0");
 
-            text.text = (count.ToString());
+        if (timer >= 0)
+        {
+            if (Input.GetKeyUp(KeyCode.UpArrow))
+            {
+                count++;
+
+                text.text = (count.ToString());
+            }
+
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                count--;
+
+                text.text = (count.ToString());
+            }
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                Checker();
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        else
         {
-            count--;
+            lost.SetActive(true);
+            lostText.text = ("You loose! You ran out of time");
 
-            text.text = (count.ToString());
+            retryButton.SetActive(true);
         }
     }
 
     public void Checker()
     {
+        checkerButton.SetActive(false);
+        retryButton.SetActive(true);
+
         if (count == amount)
         {
             win.SetActive(true);
@@ -68,6 +113,8 @@ public class Count : MonoBehaviour
 
             checkerButton.SetActive(false);
             retryButton.SetActive(true);
+            
+            nextLevelButton.SetActive(true);
 
             Destroy(this);
         }
@@ -75,7 +122,7 @@ public class Count : MonoBehaviour
         else if (count == amount - 2 || count == amount + 2)
         {
             close.SetActive(true);
-            closeText.text = ("So close! The correct number was: " + amount.ToString());
+            closeText.text = ("So close! The correct number was: " + amount.ToString() + ". Nice Try");
 
             checkerButton.SetActive(false);
             retryButton.SetActive(true);

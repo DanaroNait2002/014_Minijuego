@@ -2,10 +2,15 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject canvas;
+
     [SerializeField]
     private Vector2 origin;
     [SerializeField] 
@@ -15,79 +20,95 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private float timer;
     [SerializeField]
-    private float maxTimer;
+    private float maxCooldown;
     [SerializeField]
-    private float minTimer;
+    private float minCooldown;
     [SerializeField] 
     private float cooldown;
 
     [SerializeField]
+    private float gameTime;
+    [SerializeField]
+    private TextMeshProUGUI textTime;
+
+    [SerializeField]
     public int amount;
-    [SerializeField]
-    private int maxAmount;
-    [SerializeField]
-    private int minAmount;
-    [SerializeField]
-    private int counter;
 
     [SerializeField]
     private bool canSummon;
     [SerializeField]
-    private GameObject objectType01;
+    private GameObject[] objectType01;
+    [SerializeField]
+    public int value;
 
     public void Start()
-    {
-        counter = 0;
-        amount = Random.Range(minAmount, maxAmount);
+    { 
+        value = Random.Range(0, objectType01.Length - 1);
 
         origin = new Vector2(-10, Random.Range(-4, 4));
 
         canSummon = true;
 
-        cooldown = Random.Range(minTimer, maxTimer);
+        cooldown = Random.Range(minCooldown, maxCooldown);
+
+        gameTime = 20f;
     }
 
     private void Update()
     {
-        if (origin == prevOrigin)
-        {
-            canSummon = false;
 
-            origin = new Vector2(-10, Random.Range(-4, 4));
-        }
-        else
-        {
-            canSummon = true;
-        }
+        gameTime -= Time.deltaTime;
 
-        if (canSummon)
-        {
-            timer += Time.deltaTime;
+        textTime.text = gameTime.ToString("0");
 
-            if (timer >= cooldown)
+        if (gameTime >= 5f)
+        {
+            if (origin == prevOrigin)
             {
-                Instantiate(objectType01, origin, Quaternion.identity);
-
-                prevOrigin = origin;
+                canSummon = false;
 
                 origin = new Vector2(-10, Random.Range(-4, 4));
+            }
+            else
+            {
+                canSummon = true;
+            }
 
-                counter++;
+            if (canSummon)
+            {
+                timer += Time.deltaTime;
 
-                ResetTimer();
+                if (timer >= cooldown)
+                {
+                    Instantiate(objectType01[value], origin, Quaternion.identity);
+
+                    prevOrigin = origin;
+
+                    origin = new Vector2(-10, Random.Range(-4, 4));
+
+                    amount++;
+
+                    ResetTimer();
+                }
             }
         }
-
-        if (counter == amount)
+        else if (gameTime <= 0f)
         {
-            canSummon = false;
+            EndLevel_01();
+            textTime.text = "0";
         }
     }
 
     private void ResetTimer()
     {
-        cooldown = Random.Range(minTimer, maxTimer);
+        cooldown = Random.Range(minCooldown, maxCooldown);
 
         timer = 0;
+    }
+
+    private void EndLevel_01()
+    {
+        canvas.SetActive(true);
+        textTime.gameObject.SetActive(false);
     }
 }
