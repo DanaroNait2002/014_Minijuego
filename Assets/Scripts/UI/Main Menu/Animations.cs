@@ -56,8 +56,6 @@ public class Animations : MonoBehaviour
     private float[] locationOptions;
     [SerializeField]
     private float[] locationOptionsOut;
-    [SerializeField]
-    private float locationCredits;
 
     //BOOLS -> STATE SELECTOR
     [SerializeField]
@@ -212,6 +210,44 @@ public class Animations : MonoBehaviour
             }
         }
 
+        if (animationCreditsIn && !animationMainMenuOut)
+        {
+            timer += Time.deltaTime;
+
+            if (valueCredits >= 0 && valueCredits <= gridCredits.Length - 1)
+            {
+                if(timer >= timeAnimate)
+                {
+                    if (valueCredits <= 2)
+                    {
+                        LeanTween.moveLocalX(gridCredits[valueCredits], -495f, timeMove);
+                    }
+
+                    else if (valueCredits == gridCredits.Length - 1)
+                    {
+                        LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);
+                    }
+
+                    else
+                    {
+                        LeanTween.moveLocalX(gridCredits[valueCredits], 495f, timeMove);
+                    }
+
+                    valueCredits++;
+                    timer = 0;
+                }
+            }
+
+            if (valueCredits > gridCredits.Length - 1)
+            {
+                valueCredits = gridCredits.Length - 1;
+
+                timer = 0;
+
+                animationCreditsIn = false;
+            }
+        }
+
         #endregion
 
         #region ANIMATION OUT
@@ -289,6 +325,38 @@ public class Animations : MonoBehaviour
                 timer = 0;
 
                 animationOptionsOut = false;
+            }
+        }
+
+        if (animationCreditsOut)
+        {
+            timer += Time.deltaTime;
+
+            if (valueCredits >= 0 && valueCredits <= gridCredits.Length - 1)
+            {
+                if (timer >= timeAnimate)
+                {
+                    if (valueCredits <= 2)
+                    {
+                        LeanTween.moveLocalX(gridCredits[valueCredits], -1450, timeMove);
+                    }
+                    else
+                    {
+                        LeanTween.moveLocalX(gridCredits[valueCredits], 1450f, timeMove);
+                    }
+
+                    valueCredits--;
+                    timer = 0;
+                }
+            }
+
+            if (valueCredits < 0)
+            {
+                valueCredits = 0;
+
+                timer = 0;
+
+                animationCreditsOut = false;
             }
         }
         #endregion
