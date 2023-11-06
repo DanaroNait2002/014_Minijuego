@@ -51,7 +51,7 @@ public class Animations : MonoBehaviour
     [SerializeField]
     private float[] locationMainMenu;
     [SerializeField]
-    private float locationLevelSelection;
+    private float[] locationLevelSelection;
     [SerializeField]
     private float[] locationOptions;
     [SerializeField]
@@ -94,7 +94,11 @@ public class Animations : MonoBehaviour
 
         locationButtonBack = -455f;
 
-        locationLevelSelection = -185f;
+        locationLevelSelection[0] = -130f;
+        locationLevelSelection[1] = -130f;
+        locationLevelSelection[2] = -130f;
+        locationLevelSelection[3] = -470f;
+
 
         locationOptions[0] = -555f;
         locationOptions[1] = 555f;
@@ -160,7 +164,7 @@ public class Animations : MonoBehaviour
                         LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);
                     }
 
-                    LeanTween.moveLocalY(gridLevelSelection[valueLevelSelection], locationLevelSelection, timeMove);
+                    LeanTween.moveLocalY(gridLevelSelection[valueLevelSelection], locationLevelSelection[valueLevelSelection], timeMove);
 
                     valueLevelSelection++;
                     timer = 0;
