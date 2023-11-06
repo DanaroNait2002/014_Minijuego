@@ -43,6 +43,7 @@ public class LevelSelection : MonoBehaviour
             if (value > levels.Length - 1 && timer >= 0.35f)
             {
                 LeanTween.moveLocalX(levels[currentLevel], 0f, 0.35f);
+                LeanTween.moveLocalY(levels[currentLevel], 0f, 0.35f);
                 LeanTween.scale(levels[currentLevel], new Vector3(5f, 5f, 5f), 0.35f).setOnComplete(Loader);
             }
         }

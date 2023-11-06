@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class LevelBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region VARIABLES
+
+    [SerializeField]
+    private GameObject blockLevel01;
+    [SerializeField] 
+    private GameObject blockLevel02;
+    [SerializeField] 
+    private GameObject blockLevel03;
+
+    #endregion
+
+    #region METHODS
+
+    private void Start()
     {
-        
+        //PLAYER PREFBS CHECKING IF THE PLAYER HAVE REACH THREE STARS IN THE PREVIOUS LEVEL
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
 }
