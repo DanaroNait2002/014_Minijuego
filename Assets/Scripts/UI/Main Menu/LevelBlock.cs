@@ -34,21 +34,21 @@ public class LevelBlock : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("AmmountMedals01"));
-
         //PLAYER PREFBS CHECKING IF THE PLAYER HAVE REACH THREE STARS IN THE PREVIOUS LEVEL
         if (PlayerPrefs.GetString("TutorialDone") == "True")
         {
             blockLevel01.SetActive(false);
             buttonLevel01.interactable = true;
-            Debug.Log("TUTORIAL DONE");
+
+            //INSERT ANIMATION FOR UNLOCKING LEVEL 01
+            
         }
         else
         {
             blockLevel01.SetActive(true);
             buttonLevel01.interactable = false;
-            Debug.Log("TUTORIAL HAVEN'T DONE");
         }
+
 
         if (PlayerPrefs.GetInt("AmmountMedals01") == 3)
         {
@@ -59,7 +59,7 @@ public class LevelBlock : MonoBehaviour
             medals01[1].SetActive(true);
             medals01[2].SetActive(true);
 
-            Debug.Log("SHOW ALL MEDALS");
+            //INSERT ANIMATION FOR UNLOCKING LEVEL 02
         }
         else
         {
@@ -70,21 +70,19 @@ public class LevelBlock : MonoBehaviour
             {
                 medals01[0].SetActive(true);
                 medals01[1].SetActive(true);
-                Debug.Log("SHOW SECOND MEDAL");
             }
             else if (PlayerPrefs.GetInt("AmmountMedals01") == 1)
             {
                 medals01[0].SetActive(true);
-                Debug.Log("SHOW FIRST MEDAL");
             }
             else
             {
                 medals01[0].SetActive(false);
                 medals01[1].SetActive(false);
                 medals01[2].SetActive(false);
-                Debug.Log("DEBERÍAN DE QUITARSE ESTAS");
             }
         }
+
 
         if (PlayerPrefs.GetInt("AmmountMedals02") == 3)
         {
@@ -92,12 +90,15 @@ public class LevelBlock : MonoBehaviour
             buttonLevel03.interactable = true;
 
             medals02[2].SetActive(true);
+
+            //INSERT ANIMATION FOR UNLOCKING LEVEL 03
         }
         else
         {
             blockLevel03.SetActive(true);
             buttonLevel03.interactable = false;
         }
+
 
         if (PlayerPrefs.GetInt("AmmountMedals03") == 3)
         {
