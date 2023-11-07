@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 115782632}
   - component: {fileID: 115782631}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: TIMER CANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1183860008}
-  m_Father: {fileID: 1907832024}
+  m_Father: {fileID: 766041701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1148,6 +1148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 717046726}
   - component: {fileID: 717046725}
+  - component: {fileID: 717046727}
   m_Layer: 0
   m_Name: MANAGER
   m_TagString: Untagged
@@ -1182,6 +1183,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717046727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717046724}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff27fc7afc9b0d4e9f1bf2cbb5fb0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorial_Canvas: {fileID: 0}
+  text: {fileID: 0}
+  startTutorial: 0
+  hasSeenTutorial_Level01_Text: 
 --- !u!1 &766041700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &766041701
 Transform:
   m_ObjectHideFlags: 0
@@ -1212,6 +1229,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 980731713}
+  - {fileID: 115782630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &867300123
@@ -1366,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &980731710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1673,7 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca536d93d491294f9c67857878fbf0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 766041700}
+  canvas: {fileID: 980731709}
   origin: {x: 0, y: 0}
   prevOrigin: {x: 0, y: 0}
   spawnPos: {x: 0, y: 0}
@@ -1997,7 +2015,7 @@ GameObject:
   - component: {fileID: 1183860010}
   - component: {fileID: 1183860009}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Background_Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2573,7 +2591,6 @@ Transform:
   m_Children:
   - {fileID: 1114328795}
   - {fileID: 1076009594}
-  - {fileID: 115782630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1907832025

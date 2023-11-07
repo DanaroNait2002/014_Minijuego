@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SoundButtons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private AudioSource audioSource;
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ButtonPressedSound()
     {
-        
+        audioSource.Play();
     }
 }
