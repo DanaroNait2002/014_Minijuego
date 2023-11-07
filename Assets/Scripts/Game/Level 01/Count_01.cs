@@ -5,7 +5,7 @@ using TMPro;
 using static UnityEngine.UI.Image;
 using UnityEngine.LowLevel;
 
-public class Count : MonoBehaviour
+public class Count_01 : MonoBehaviour
 {
     [SerializeField]
     private int count;
@@ -45,6 +45,9 @@ public class Count : MonoBehaviour
     [SerializeField]
     private GameObject nextLevelButton;
 
+    [SerializeField]
+    private int ammountMedals;
+
     public void Awake()
     {
         location = new Vector2(0f, 1.75f);
@@ -59,12 +62,14 @@ public class Count : MonoBehaviour
         checkerButton.SetActive(true);
         retryButton.SetActive(false);
 
-        amount = GameObject.Find("Spawner").GetComponent<Spawner>().amount;
+        amount = GameObject.Find("Spawner").GetComponent<Spawner_01>().amount;
 
-        value = GameObject.Find("Spawner").GetComponent<Spawner>().value;
+        value = GameObject.Find("Spawner").GetComponent<Spawner_01>().value;
         Instantiate(objectType[value], location, Quaternion.identity);
 
         timer = 15f;
+
+        ammountMedals = PlayerPrefs.GetInt("AmmountMedals01", 0);
     }
 
     public void Update()
@@ -115,10 +120,22 @@ public class Count : MonoBehaviour
             win.SetActive(true);
             winText.text = ("You won");
 
+            ammountMedals++;
+
             checkerButton.SetActive(false);
-            retryButton.SetActive(true);
-            
-            nextLevelButton.SetActive(true);
+
+            if (ammountMedals > 2)
+            {
+                ammountMedals = 3;
+                PlayerPrefs.SetInt("AmmountMedals01", ammountMedals);
+
+                nextLevelButton.SetActive(true);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("AmmountMedals01", ammountMedals);
+                retryButton.SetActive(true);
+            }
 
             Destroy(this);
         }

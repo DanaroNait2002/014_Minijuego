@@ -116,8 +116,6 @@ public class Animations : MonoBehaviour
 
         if (animationMainMenuIn && !animationLevelSelectionOut && !animationOptionsOut && !animationCreditsOut)
         {
-            Debug.Log("AnimationInMainMenu");
-
             //Move the Tittle
             LeanTween.moveLocalY(textTittle, 336, 1f);
             LeanTween.moveLocalY(buttonBack, -1230, timeMove);
@@ -129,7 +127,6 @@ public class Animations : MonoBehaviour
             {
                 if (timer >= timeAnimate)
                 {
-                    Debug.Log("MOVING" + valueMainMenu);
                     LeanTween.moveLocalY(gridMainMenu[valueMainMenu], locationMainMenu[valueMainMenu], timeMove);
 
                     valueMainMenu++;
@@ -148,8 +145,6 @@ public class Animations : MonoBehaviour
         }
         if (animationLevelSelectionIn && !animationMainMenuOut)
         {
-            Debug.Log("AnimationLevelSelectionMenu");
-          
             //Set Timer
             timer += Time.deltaTime;
 
@@ -157,8 +152,6 @@ public class Animations : MonoBehaviour
             {
                 if (timer >= timeAnimate)
                 {
-                    Debug.Log("MOVING" + valueLevelSelection);
-
                     if (valueLevelSelection == gridLevelSelection.Length - 1)
                     {
                         LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);
@@ -182,16 +175,12 @@ public class Animations : MonoBehaviour
         }
         if (animationOptionsIn && !animationMainMenuOut)
         {
-            Debug.Log("AnimationOptions");
-
             timer += Time.deltaTime;
 
             if (valueOptions >= 0 && valueOptions <= gridOptions.Length - 1)
             {
                 if (timer >= timeAnimate)
                 {
-                    Debug.Log("MOVING" + valueOptions);
-
                     if (valueOptions == gridOptions.Length - 1)
                     {
                         LeanTween.moveLocalY(buttonBack, locationButtonBack, timeMove);

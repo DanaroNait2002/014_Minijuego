@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Spawner : MonoBehaviour
+public class Spawner_01 : MonoBehaviour
 {
     [SerializeField]
     private GameObject canvas;
