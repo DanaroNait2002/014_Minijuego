@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
 
         textTime.text = gameTime.ToString("0");
 
-        if (gameTime >= 5f)
+        if (gameTime >= 2.5f)
         {
             if (origin == prevOrigin)
             {

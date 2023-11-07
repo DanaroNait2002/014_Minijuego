@@ -94,10 +94,14 @@ public class Count : MonoBehaviour
         }
         else
         {
+            textTimer.text = "0";
+
             lost.SetActive(true);
             lostText.text = ("You loose! You ran out of time");
 
             retryButton.SetActive(true);
+
+            Destroy(this);
         }
     }
 
