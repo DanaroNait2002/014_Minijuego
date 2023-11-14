@@ -89,6 +89,8 @@ public class LevelBlock : MonoBehaviour
             blockLevel03.SetActive(false);
             buttonLevel03.interactable = true;
 
+            medals02[0].SetActive(true);
+            medals02[1].SetActive(true);
             medals02[2].SetActive(true);
 
             //INSERT ANIMATION FOR UNLOCKING LEVEL 03
@@ -97,16 +99,50 @@ public class LevelBlock : MonoBehaviour
         {
             blockLevel03.SetActive(true);
             buttonLevel03.interactable = false;
+
+            if (PlayerPrefs.GetInt("AmmountMedals02") == 2)
+            {
+                medals02[0].SetActive(true);
+                medals02[1].SetActive(true);
+            }
+            else if (PlayerPrefs.GetInt("AmmountMedals02") == 1)
+            {
+                medals02[0].SetActive(true);
+            }
+            else
+            {
+                medals02[0].SetActive(false);
+                medals02[1].SetActive(false);
+                medals02[2].SetActive(false);
+            }
         }
 
 
         if (PlayerPrefs.GetInt("AmmountMedals03") == 3)
-        {
+        { 
+            medals03[0].SetActive(true);
+            medals03[1].SetActive(true);
             medals03[2].SetActive(true);
+
+            //INSERT ANIMATION FOR UNLOCKING LEVEL 03
         }
         else
         {
-
+            if (PlayerPrefs.GetInt("AmmountMedals03") == 2)
+            {
+                medals03[0].SetActive(true);
+                medals03[1].SetActive(true);
+            }
+            else if (PlayerPrefs.GetInt("AmmountMedals03") == 1)
+            {
+                medals03[0].SetActive(true);
+            }
+            else
+            {
+                medals03[0].SetActive(false);
+                medals03[1].SetActive(false);
+                medals03[2].SetActive(false);
+            }
         }
     }
 

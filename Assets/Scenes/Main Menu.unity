@@ -876,7 +876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &191105451
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2814,7 +2814,7 @@ GameObject:
   - component: {fileID: 553290920}
   - component: {fileID: 553290919}
   m_Layer: 5
-  m_Name: Image_WithMedal01
+  m_Name: Image_WithMedal02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3441,7 +3441,7 @@ GameObject:
   - component: {fileID: 659589333}
   - component: {fileID: 659589332}
   m_Layer: 5
-  m_Name: Image_WithMedal01
+  m_Name: Image_WithMedal03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10182,8 +10182,14 @@ MonoBehaviour:
   - {fileID: 1551722827}
   - {fileID: 1186280416}
   - {fileID: 326348526}
-  medals02: []
-  medals03: []
+  medals02:
+  - {fileID: 576674886}
+  - {fileID: 553290917}
+  - {fileID: 659589330}
+  medals03:
+  - {fileID: 1256253415}
+  - {fileID: 1716144362}
+  - {fileID: 1630878640}
 --- !u!1 &2135147099
 GameObject:
   m_ObjectHideFlags: 0

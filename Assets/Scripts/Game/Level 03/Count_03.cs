@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Count_02 : MonoBehaviour
+public class Count_03 : MonoBehaviour
 {
     [SerializeField]
     private int count;
@@ -60,15 +60,15 @@ public class Count_02 : MonoBehaviour
         checkerButton.SetActive(true);
         retryButton.SetActive(false);
 
-        amount = GameObject.Find("Spawner").GetComponent<Spawner_02>().amount;
+        amount = GameObject.Find("Spawner").GetComponent<Spawner_03>().amount;
 
-        value = GameObject.Find("Spawner").GetComponent<Spawner_02>().value;
+        value = GameObject.Find("Spawner").GetComponent<Spawner_03>().value;
 
         Instantiate(objectType[value], location, Quaternion.identity);
 
         timer = 15f;
 
-        ammountMedals = PlayerPrefs.GetInt("AmmountMedals02", 0);
+        ammountMedals = PlayerPrefs.GetInt("AmmountMedals03", 0);
     }
 
     public void Update()
@@ -126,13 +126,13 @@ public class Count_02 : MonoBehaviour
             if (ammountMedals > 2)
             {
                 ammountMedals = 3;
-                PlayerPrefs.SetInt("AmmountMedals02", ammountMedals);
+                PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
 
                 nextLevelButton.SetActive(true);
             }
             else
             {
-                PlayerPrefs.SetInt("AmmountMedals02", ammountMedals);
+                PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
                 retryButton.SetActive(true);
             }
 
