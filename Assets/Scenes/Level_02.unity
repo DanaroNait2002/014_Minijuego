@@ -851,7 +851,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 980731712}
   - component: {fileID: 980731711}
   - component: {fileID: 980731710}
-  - component: {fileID: 980731714}
+  - component: {fileID: 980731715}
   m_Layer: 5
   m_Name: END CANVAS
   m_TagString: Untagged
@@ -1600,7 +1600,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &980731714
+--- !u!114 &980731715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 980731709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30aa100fa89125b45a7649f9ffabff47, type: 3}
+  m_Script: {fileID: 11500000, guid: 41503ca64a48017419d3183b795f356d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
@@ -1781,7 +1781,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076009594}
-  - component: {fileID: 1076009595}
   - component: {fileID: 1076009596}
   m_Layer: 0
   m_Name: Spawner
@@ -1805,38 +1804,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1907832024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1076009595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1076009593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca536d93d491294f9c67857878fbf0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 980731709}
-  origin: {x: 0, y: 0}
-  prevOrigin: {x: 0, y: 0}
-  spawnPos: {x: 0, y: 0}
-  timer: 0
-  maxCooldown: 1.5
-  minCooldown: 0.5
-  cooldown: 0
-  gameTime: 0
-  textTime: {fileID: 1989355499}
-  amount: 0
-  canSummon: 0
-  objectType01:
-  - {fileID: 3418340326962304412, guid: 39218d421e1971b469abff5f1ecc27e3, type: 3}
-  - {fileID: 3418340326962304412, guid: 1fc785702166dd54081c0654aaa8ba2e, type: 3}
-  - {fileID: 3418340326962304412, guid: e12e86e8e22a2ba4ababc768d78c8a0e, type: 3}
-  - {fileID: 3418340326962304412, guid: bfe301e5f55823d4bbd055726d450a37, type: 3}
-  - {fileID: 3418340326962304412, guid: 65f7f632ad53d0f4194c327bb5ae6129, type: 3}
-  - {fileID: 3418340326962304412, guid: 08b2069b60988eb4fa1f36df216907b9, type: 3}
-  value: 0
 --- !u!114 &1076009596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2993,8 +2960,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 980731714}
-        m_TargetAssemblyTypeName: Count, Assembly-CSharp
+      - m_Target: {fileID: 980731715}
+        m_TargetAssemblyTypeName: Count_02, Assembly-CSharp
         m_MethodName: Checker
         m_Mode: 1
         m_Arguments:

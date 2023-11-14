@@ -47,11 +47,6 @@ public class Spawner_02 : MonoBehaviour
         value = Random.Range(0, objectType01.Length - 1);
         value_NON = Random.Range(0, objectType01.Length - 1);
 
-        if (value_NON == value)
-        {
-            value_NON = Random.Range(0, objectType01.Length - 1);
-        }
-
         origin = new Vector2(-10, Random.Range(-4, 4));
 
         canSummon = true;
@@ -63,57 +58,66 @@ public class Spawner_02 : MonoBehaviour
 
     private void Update()
     {
-
-        gameTime -= Time.deltaTime;
-
-        textTime.text = gameTime.ToString("0");
-
-        if (gameTime >= 2.5f)
+        if (value_NON == value)
         {
-            if (origin == prevOrigin)
-            {
-                canSummon = false;
+            value_NON = Random.Range(0, objectType01.Length - 1);
+        }
+        else
+        {
+            gameTime -= Time.deltaTime;
 
-                origin = new Vector2(-10, Random.Range(-4, 4));
-            }
-            else
-            {
-                canSummon = true;
-            }
+            textTime.text = gameTime.ToString("0");
 
-            if (canSummon)
+            if (gameTime >= 2.5f)
             {
-                timer += Time.deltaTime;
-
-                if (timer >= cooldown)
+                if (origin == prevOrigin)
                 {
-                    i = Random.Range(0, 1);
-
-                    if (i == 0)
-                    {
-                        Instantiate(objectType01[value], origin, Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(objectType01[value_NON], origin, Quaternion.identity);
-                    }
-
-                    prevOrigin = origin;
+                    canSummon = false;
 
                     origin = new Vector2(-10, Random.Range(-4, 4));
+                }
+                else
+                {
+                    canSummon = true;
+                }
 
-                    amount++;
+                if (canSummon)
+                {
+                    timer += Time.deltaTime;
 
-                    ResetTimer();
+                    if (timer >= cooldown)
+                    {
+                        i = Random.Range(0, 10);
+
+                        if (i <= 5)
+                        {
+                            Instantiate(objectType01[value], origin, Quaternion.identity);
+
+                            amount++;
+                        }
+                        else
+                        {
+                            Instantiate(objectType01[value_NON], origin, Quaternion.identity);
+                        }
+
+                        prevOrigin = origin;
+
+                        origin = new Vector2(-10, Random.Range(-4, 4));
+
+
+                        ResetTimer();
+                    }
                 }
             }
-        }
-        else if (gameTime <= 0f)
-        {
-            EndLevel_01();
-            textTime.text = "0";
+            else if (gameTime <= 0f)
+            {
+                EndLevel_01();
+                textTime.text = "0";
+            }
         }
     }
+
+        
 
     private void ResetTimer()
     {
