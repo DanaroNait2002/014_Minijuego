@@ -421,9 +421,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 717046724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ff27fc7afc9b0d4e9f1bf2cbb5fb0bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 82171a1b57081874c8cdaa7f669d4e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  steps: []
+  value: 0
 --- !u!1 &766041700
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +543,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 717046727}
         m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
-        m_MethodName: Cheat
+        m_MethodName: TutorialComplete
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

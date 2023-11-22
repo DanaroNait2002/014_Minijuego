@@ -10096,7 +10096,7 @@ MonoBehaviour:
   valueCredits: 0
   timer: 0
   timeAnimate: 0.15
-  timeMove: 0.25
+  timeMove: 1
   locationTittle: 0
   locationButtonBack: 0
   locationMainMenu:
@@ -10955,7 +10955,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

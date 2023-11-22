@@ -15,7 +15,10 @@ public class Tutorial : MonoBehaviour
 
     #region METHODS
 
-
+    public void TutorialComplete()
+    {
+        PlayerPrefs.SetString("TutorialDone", "True");
+    }
 
     #endregion
 }
