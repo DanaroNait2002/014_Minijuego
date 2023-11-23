@@ -1,150 +1,205 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using static UnityEngine.UI.Image;
+using UnityEngine.LowLevel;
+using Unity.VisualScripting;
 
 public class Count_03 : MonoBehaviour
 {
-    [SerializeField]
-    private int count;
-    [SerializeField]
-    private int amount;
-    [SerializeField]
-    private int value;
-    [SerializeField]
-    private GameObject[] objectType;
-    [SerializeField]
-    private Vector2 location;
+    #region VARIABLES
 
-    [SerializeField]
-    private float timer;
-    [SerializeField]
-    private TextMeshProUGUI textTimer;
+    [Header("Vectors")]
+    [SerializeField] private Vector2 location01;
+    [SerializeField] private Vector2 location02;
 
-    [SerializeField]
-    private TextMeshProUGUI text;
-    [SerializeField]
-    private GameObject win;
-    [SerializeField]
-    private TextMeshProUGUI winText;
-    [SerializeField]
-    private GameObject close;
-    [SerializeField]
-    private TextMeshProUGUI closeText;
-    [SerializeField]
-    private GameObject lost;
-    [SerializeField]
-    private TextMeshProUGUI lostText;
+    [Header("Text & Related")]
+    [SerializeField] private TextMeshProUGUI textTimer;
+    [SerializeField] private TextMeshProUGUI textEnd;
+    [SerializeField] private TextMeshProUGUI textNumber01;
+    [SerializeField] private TextMeshProUGUI textNumber02;
+    [SerializeField] private GameObject checkerButton;
+    [SerializeField] private GameObject retryButton;
 
-    [SerializeField]
-    private GameObject checkerButton;
-    [SerializeField]
-    private GameObject retryButton;
-    [SerializeField]
-    private GameObject nextLevelButton;
+    [Header("Times")]
+    [SerializeField] private float timer;
 
-    [SerializeField]
-    private int ammountMedals;
+    [Header("Array & Values")]
+    [SerializeField] private GameObject[] objectType;
+    [SerializeField] private int value01;
+    [SerializeField] private int value02;
+    [SerializeField] private int count01;
+    [SerializeField] private int count02;
+    [SerializeField] private int amount01;
+    [SerializeField] private int amount02;
+
+    [Header("PlayerPrefs Related")]
+    [SerializeField] private int ammountMedals;
+
+    #endregion
+
+    #region METHODS
 
     public void Awake()
     {
-        location = new Vector2(0f, 1.75f);
-
-        count = 0;
-        text.text = (count.ToString());
-
-        win.SetActive(false);
-        close.SetActive(false);
-        lost.SetActive(false);
-
+        //GameObjects SetActives
+        textEnd.gameObject.SetActive(false);
         checkerButton.SetActive(true);
         retryButton.SetActive(false);
 
-        amount = GameObject.Find("Spawner").GetComponent<Spawner_03>().amount;
+        //Postion Values
+        location01 = new Vector2(-4.63f, 0.48f);
+        location02 = new Vector2(4.63f, 0.48f);
 
-        value = GameObject.Find("Spawner").GetComponent<Spawner_03>().value;
-
-        Instantiate(objectType[value], location, Quaternion.identity);
-
+        //Times Values
         timer = 15f;
 
+        //Values
+        count01 = 0;
+        amount01 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().amount01;
+        amount02 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().amount02;
+
+        value01 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().value01;
+        value02 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().value02;
         ammountMedals = PlayerPrefs.GetInt("AmmountMedals03", 0);
+
+        //Actions
+        Instantiate(objectType[value01], location01, Quaternion.identity);
+        Instantiate(objectType[value02], location02, Quaternion.identity);
     }
 
     public void Update()
     {
-        timer -= Time.deltaTime;
+        //Timer is shown in the screen
         textTimer.text = timer.ToString("0");
 
+        //While the timer is above the 0 Value
         if (timer >= 0)
         {
+            //Timer will be running
+            timer -= Time.deltaTime;
+
+            //if Up Arrow is pressed
             if (Input.GetKeyUp(KeyCode.UpArrow))
             {
-                count++;
-
-                text.text = (count.ToString());
+                //Number ++
+                count01++;
+                textNumber01.text = (count01.ToString());
             }
 
+            //if Down Arrow is pressed
             if (Input.GetKeyUp(KeyCode.DownArrow))
             {
-                count--;
-
-                text.text = (count.ToString());
+                if (count01 == 0)
+                {
+                    count01 = 0;
+                }
+                else
+                {
+                    // Number--
+                    count01--;
+                    textNumber01.text = (count01.ToString());
+                }
             }
+            //if W is pressed
+            if (Input.GetKeyUp(KeyCode.W))
+            {
+                //Number ++
+                count02++;
+                textNumber02.text = (count02.ToString());
+            }
+
+            //if S is pressed
+            if (Input.GetKeyUp(KeyCode.S))
+            {
+                if (count02 == 0)
+                {
+                    count02 = 0;
+                }
+                else
+                {
+                    // Number--
+                    count02--;
+                    textNumber02.text = (count02.ToString());
+                }
+            }
+            //if Enter is pressed
             if (Input.GetKeyUp(KeyCode.Return))
             {
                 Checker();
             }
         }
+        //if Timer has reach 0 Value
         else
         {
+            //Timer stops
             textTimer.text = "0";
 
-            lost.SetActive(true);
-            lostText.text = ("You loose! You ran out of time");
+            //Lost Game
+            textEnd.gameObject.SetActive(true);
+            textEnd.text = ("¡Has perdido! Te quedaste sin tiempo");
 
+            //Retry button Active
             retryButton.SetActive(true);
 
+            //Destoy Script
             Destroy(this);
         }
     }
 
     public void Checker()
     {
+        //Checker button is Disabled
         checkerButton.SetActive(false);
-        retryButton.SetActive(true);
 
-        if (count == amount)
+        //if the player insert the correct number
+        if (count01 == amount01 && count02 == amount02)
         {
-            win.SetActive(true);
-            winText.text = ("You won");
+            //Win Game
+            textEnd.gameObject.SetActive(true);
 
+            //Medals ++
             ammountMedals++;
 
             checkerButton.SetActive(false);
 
+            //if player has 3 medals
             if (ammountMedals > 2)
             {
+                //Medals value keeps being 3 (no more medals)
                 ammountMedals = 3;
-                PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
 
-                nextLevelButton.SetActive(true);
+                textEnd.text = ("¡Has ganado! Ya puedes jugar el siguiente nivel");
             }
             else
             {
-                PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
+                //Retry button
                 retryButton.SetActive(true);
+                textEnd.text = ("¡Has ganado! Pero aún debes conseguir más medallas en este nivel");
             }
+
+            //Medals value is saved
+            PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
 
             Destroy(this);
         }
 
-        else if (count == amount - 2 || count == amount + 2)
+        else if (count01 >= amount01 - 2 && count01 <= amount01 + 2 || count02 >= amount01 - 2 && count02 <= amount01 + 2)
         {
-            close.SetActive(true);
-            closeText.text = ("So close! The correct number was: " + amount.ToString() + ". Nice Try");
+            if (count01 == amount01 || count02 == amount02)
+            {
+                textEnd.text = ("¡Que cerca! ¡Has acertado uno de los dos! Buen intento");
 
-            checkerButton.SetActive(false);
+            }
+            else
+            {
+                //So Close Game
+                textEnd.gameObject.SetActive(true);
+                textEnd.text = ("¡Que cerca! Buen intento");
+            }
+
+            //Retry Button
             retryButton.SetActive(true);
 
             Destroy(this);
@@ -152,13 +207,16 @@ public class Count_03 : MonoBehaviour
 
         else
         {
-            lost.SetActive(true);
-            lostText.text = ("You loose! The correct number was: " + amount.ToString());
+            //Lost Game
+            textEnd.gameObject.SetActive(true);
+            textEnd.text = ("¡Has perdido! El número correcto era: " + amount01.ToString());
 
-            checkerButton.SetActive(false);
+            //Retry Button
             retryButton.SetActive(true);
 
             Destroy(this);
         }
     }
+
+    #endregion
 }

@@ -5,141 +5,214 @@ using UnityEngine;
 
 public class Spawner_03 : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject canvas;
+    #region VARIABLES
 
-    [SerializeField]
-    private Vector2 origin;
-    [SerializeField]
-    private Vector2 prevOrigin;
-    [SerializeField]
-    private Vector2 spawnPos;
-    [SerializeField]
-    private float timer;
-    [SerializeField]
-    private float maxCooldown;
-    [SerializeField]
-    private float minCooldown;
-    [SerializeField]
-    private float cooldown;
+    [Header("Canvas")]
+    [SerializeField] private GameObject canvasStart;
+    [SerializeField] private GameObject canvasTimer;
+    [SerializeField] private GameObject canvasEnd;
 
-    [SerializeField]
-    private float gameTime;
-    [SerializeField]
-    private TextMeshProUGUI textTime;
+    [Header("Vectors")]
+    [SerializeField] private Vector2 origin;
+    [SerializeField] private Vector2 prevOrigin;
+    [SerializeField] private Vector2 spawnPos;
 
-    [SerializeField]
-    public int amount;
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI textTimeStart;
+    [SerializeField] private TextMeshProUGUI textTimeInGame;
 
-    [SerializeField]
-    private bool canSummon;
-    [SerializeField]
-    private GameObject[] objectType01;
-    [SerializeField]
-    public int value;
-    [SerializeField]
-    public int value_NON;
-    [SerializeField]
-    public int value_Third;
-    [SerializeField]
-    public int i;
+    [Header("Times")]
+    [SerializeField] private float timerCooldown;
+    [SerializeField] private float maxCooldown;
+    [SerializeField] private float minCooldown;
+    [SerializeField] private float cooldownValue;
+    [SerializeField] private float timerStart;
+    [SerializeField] private float timerInGame;
+
+    [Header("Arrays & Values")]
+    //Cats in Movement
+    [SerializeField] private GameObject[] objectTypeMoving;
+    [SerializeField] public int value01;
+    [SerializeField] public int value02;
+    [SerializeField] private int value03;
+    [SerializeField] private int valueRandom;
+    //Static Cats
+    [SerializeField] private GameObject[] objectTypeStatic;
+    [SerializeField] private GameObject instanteableStatic_01;
+    [SerializeField] private GameObject instanteableStatic_02;
+
+    [Header("Bools")] //Bools 
+    [SerializeField] private bool canSummon;
+    [SerializeField] private bool startGame;
+
+    [Header("Public Variables")]
+    [SerializeField] public int amount01;
+    [SerializeField] public int amount02;
+
+    #endregion
+
+    #region METHODS
 
     public void Start()
     {
-        value = Random.Range(0, objectType01.Length - 1);
-        value_NON = Random.Range(0, objectType01.Length - 1);
-        value_Third = Random.Range(0, objectType01.Length - 1);
+        //Canvas SetActive values
+        canvasStart.SetActive(true);
+        canvasTimer.SetActive(false);
+        canvasEnd.SetActive(false);
 
+        //Position Values
         origin = new Vector2(-10, Random.Range(-4, 4));
 
+        //Times Values
+        cooldownValue = Random.Range(minCooldown, maxCooldown);
+        timerInGame = 20f;
+        timerStart = 5f;
+
+        //Array Values
+        value01 = Random.Range(0, objectTypeMoving.Length - 1);
+        value02 = Random.Range(0, objectTypeMoving.Length - 1);
+        value03 = Random.Range(0, objectTypeMoving.Length - 1);
+
+        //Bools Values
+        startGame = false;
         canSummon = true;
 
-        cooldown = Random.Range(minCooldown, maxCooldown);
-
-        gameTime = 20f;
+        //Actions
+        instanteableStatic_01 = Instantiate(objectTypeStatic[value01], new Vector2(-5f, 0f), Quaternion.identity);
+        instanteableStatic_02 = Instantiate(objectTypeStatic[value02], new Vector2(5f, 0f), Quaternion.identity);
     }
 
     private void Update()
     {
-        if (value_NON == value)
+        //Just in case
+        if (value02 == value01)
         {
-            value_NON = Random.Range(0, objectType01.Length - 1);
+            //Randomizing Value again
+            value02 = Random.Range(0, objectTypeMoving.Length - 1);
         }
-        else if (value_Third == value || value_Third == value_NON)
+        //Just in case
+        if (value03 == value01 || value03 == value02)
         {
-            value_Third = Random.Range(0, objectType01.Length - 1);
+            value03 = Random.Range(0, objectTypeMoving.Length - 1);
         }
-        else
+
+        //if the game is not set to start
+        if (!startGame)
         {
-            gameTime -= Time.deltaTime;
+            //Timer is shown in the screen
+            textTimeStart.text = timerStart.ToString("0");
 
-            textTime.text = gameTime.ToString("0");
-
-            if (gameTime >= 2.5f)
+            //While the timer is above the 0 value
+            if (timerStart >= 0)
             {
+                //The timer will be running
+                timerStart -= Time.deltaTime;
+            }
+            //Once the timer is under the 0 value
+            else
+            {
+                //The game will start
+                startGame = true;
+
+                //Canvas SetActive Change
+                canvasStart.SetActive(false);
+                canvasTimer.SetActive(true);
+                canvasEnd.SetActive(false);
+
+                //Timer is considered as 0
+                textTimeStart.text = "0";
+
+                //The cat shown in screen is destroyed
+                Destroy(instanteableStatic_01);
+                Destroy(instanteableStatic_02);
+            }
+        }
+
+        //If the game is set to start
+        if (startGame)
+        {
+            //Timer will start running
+            timerInGame -= Time.deltaTime;
+
+            //Timer is shown in the screen
+            textTimeInGame.text = timerInGame.ToString("0");
+
+            //While timer is above the 2.5 Value
+            if (timerInGame >= 2.5f)
+            {
+                //Checking is the prevOrigin is the same as the current origin
                 if (origin == prevOrigin)
                 {
+                    //can't summon
                     canSummon = false;
 
+                    //randomizing again
                     origin = new Vector2(-10, Random.Range(-4, 4));
                 }
+                //if not
                 else
                 {
+                    //can summon
                     canSummon = true;
                 }
 
+                //if the game can summon
                 if (canSummon)
                 {
-                    timer += Time.deltaTime;
+                    //Cooldown timer start running
+                    timerCooldown += Time.deltaTime;
 
-                    if (timer >= cooldown)
+                    //When the timer reach the cooldown Value
+                    if (timerCooldown >= cooldownValue)
                     {
-                        i = Random.Range(0, 15);
+                        valueRandom = Random.Range(0, 100);
 
-                        if (i <= 5)
+                        if (valueRandom % 2 == 0)
                         {
-                            Instantiate(objectType01[value], origin, Quaternion.identity);
-
-                            amount++;
+                            //Summon a cat
+                            Instantiate(objectTypeMoving[value01], origin, Quaternion.identity);
+                            //+1 cat summoned
+                            amount01++;
                         }
-                        else if (i >= 10)
+                        else if (valueRandom >= 50)
                         {
-                            Instantiate(objectType01[value_NON], origin, Quaternion.identity);
+                            //Summon a cat
+                            Instantiate(objectTypeMoving[value02], origin, Quaternion.identity);
+                            //+1 cat summoned
+                            amount02++;
                         }
                         else
                         {
-                            Instantiate(objectType01[value_Third], origin, Quaternion.identity);
+                            //Summon a cat
+                            Instantiate(objectTypeMoving[value03], origin, Quaternion.identity);
                         }
 
+                        //change the prevOrigin Value
                         prevOrigin = origin;
 
+                        //Randomizing new origin
                         origin = new Vector2(-10, Random.Range(-4, 4));
 
+                        //Randomizing cooldown
+                        cooldownValue = Random.Range(minCooldown, maxCooldown);
 
-                        ResetTimer();
+                        //Reseting Timer
+                        timerCooldown = 0;
                     }
                 }
             }
-            else if (gameTime <= 0f)
+            //Once the Timer reach the 0 Value
+            else if (timerInGame <= 0f)
             {
-                EndLevel_01();
-                textTime.text = "0";
+                //Time stop showing
+                textTimeInGame.text = "0";
+
+                //The phase is considered ended
+                canvasEnd.SetActive(true);
+                canvasTimer.SetActive(false);
             }
         }
     }
 
-
-
-    private void ResetTimer()
-    {
-        cooldown = Random.Range(minCooldown, maxCooldown);
-
-        timer = 0;
-    }
-
-    private void EndLevel_01()
-    {
-        canvas.SetActive(true);
-        textTime.gameObject.SetActive(false);
-    }
+    #endregion
 }
