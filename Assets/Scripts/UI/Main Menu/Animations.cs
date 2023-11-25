@@ -7,73 +7,44 @@ public class Animations : MonoBehaviour
 {
     #region VARIABLES
 
-    //CANVAS
-    [SerializeField]
-    private GameObject canvas;
+    [Header("Canvas")]
+    [SerializeField] private GameObject canvas;
 
-    //TO ANIMATE
-    [SerializeField]
-    private GameObject textTittle;
-    [SerializeField]
-    private GameObject buttonBack;
-    [SerializeField]
-    private GameObject[] gridMainMenu;
-    [SerializeField]
-    private GameObject[] gridLevelSelection;
-    [SerializeField]
-    private GameObject[] gridOptions;
-    [SerializeField]
-    private GameObject[] gridCredits;
+    [Header("Times")]
+    [SerializeField] private float timer;
+    [SerializeField] private float timeAnimate;
+    [SerializeField] private float timeMove;
 
-    //VALUES
-    [SerializeField]
-    private int valueMainMenu;
-    [SerializeField]
-    private int valueLevelSelection;
-    [SerializeField]
-    private int valueOptions;
-    [SerializeField]
-    private int valueCredits;
+    [Header("Array & Values")]
+    //To animate
+    [SerializeField] private GameObject textTittle;
+    [SerializeField] private GameObject buttonBack;
+    [SerializeField] private GameObject[] gridMainMenu;
+    [SerializeField] private GameObject[] gridLevelSelection;
+    [SerializeField] private GameObject[] gridOptions;
+    [SerializeField] private GameObject[] gridCredits;
+    //Values
+    [SerializeField] private int valueMainMenu;
+    [SerializeField] private int valueLevelSelection;
+    [SerializeField] private int valueOptions;
+    [SerializeField] private int valueCredits;
+    //Locations
+    [SerializeField] private float locationTittle;
+    [SerializeField] private float locationButtonBack;
+    [SerializeField] private float[] locationMainMenu;
+    [SerializeField] private float[] locationLevelSelection;
+    [SerializeField] private float[] locationOptions;
+    [SerializeField] private float[] locationOptionsOut;
 
-    //TIME
-    [SerializeField]
-    private float timer;
-    [SerializeField]
-    private float timeAnimate;
-    [SerializeField]
-    private float timeMove;
-
-    //LOCATIONS
-    [SerializeField]
-    private float locationTittle;
-    [SerializeField]
-    private float locationButtonBack;
-    [SerializeField]
-    private float[] locationMainMenu;
-    [SerializeField]
-    private float[] locationLevelSelection;
-    [SerializeField]
-    private float[] locationOptions;
-    [SerializeField]
-    private float[] locationOptionsOut;
-
-    //BOOLS -> STATE SELECTOR
-    [SerializeField]
-    private bool animationMainMenuIn;
-    [SerializeField]
-    private bool animationMainMenuOut;
-    [SerializeField]
-    private bool animationLevelSelectionIn;
-    [SerializeField]
-    private bool animationLevelSelectionOut;
-    [SerializeField]
-    private bool animationOptionsIn;
-    [SerializeField]
-    private bool animationOptionsOut;
-    [SerializeField]
-    private bool animationCreditsIn;
-    [SerializeField]
-    private bool animationCreditsOut;
+    [Header("Bools")]
+    [SerializeField] private bool animationMainMenuIn;
+    [SerializeField] private bool animationMainMenuOut;
+    [SerializeField] private bool animationLevelSelectionIn;
+    [SerializeField] private bool animationLevelSelectionOut;
+    [SerializeField] private bool animationOptionsIn;
+    [SerializeField] private bool animationOptionsOut;
+    [SerializeField] private bool animationCreditsIn;
+    [SerializeField] private bool animationCreditsOut;
 
     #endregion
 
@@ -117,7 +88,7 @@ public class Animations : MonoBehaviour
         if (animationMainMenuIn && !animationLevelSelectionOut && !animationOptionsOut && !animationCreditsOut)
         {
             //Move the Tittle
-            LeanTween.moveLocalY(textTittle, 336, 1f);
+            LeanTween.moveLocalY(textTittle, 418, 1f);
             LeanTween.moveLocalY(buttonBack, -1230, timeMove);
 
             //Set Timer

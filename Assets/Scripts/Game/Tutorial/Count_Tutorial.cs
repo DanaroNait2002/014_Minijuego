@@ -84,9 +84,12 @@ public class Count_Tutorial : MonoBehaviour
                     count = 0;
                 }
                 else
+                {
                     // Number--
                     count--;
-                textNumber.text = (count.ToString());
+                    textNumber.text = (count.ToString());
+                }
+                   
             }
             //if Enter is pressed
             if (Input.GetKeyUp(KeyCode.Return))
@@ -108,6 +111,28 @@ public class Count_Tutorial : MonoBehaviour
             Destroy(this);
         }
     }
+
+    public void Up()
+    {
+        //Number ++
+        count++;
+        textNumber.text = (count.ToString());
+    }
+
+    public void Down()
+    {
+        if (count == 0)
+        {
+            count = 0;
+        }
+        else
+        {
+            // Number--
+            count--;
+            textNumber.text = (count.ToString());
+        }
+    }
+
 
     public void Checker()
     {

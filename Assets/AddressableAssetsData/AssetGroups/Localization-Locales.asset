@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0e5a93e410e4f684aa9f40b16637155f
   m_SerializeEntries:
-  - m_GUID: 2446bac59b64eb740a62262e93ddfb8a
-    m_Address: English (United Kingdom) (en-GB)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cbdc409eee97f604d9e542528685f878
     m_Address: Spanish (Spain) (es-ES)
     m_ReadOnly: 1

@@ -7,26 +7,16 @@ public class LevelBlock : MonoBehaviour
 {
     #region VARIABLES
 
-    [SerializeField]
-    private GameObject blockLevel01;
-    [SerializeField] 
-    private GameObject blockLevel02;
-    [SerializeField] 
-    private GameObject blockLevel03;
-
-    [SerializeField]
-    private Button buttonLevel01;
-    [SerializeField]
-    private Button buttonLevel02;
-    [SerializeField]
-    private Button buttonLevel03;
-
-    [SerializeField]
-    private GameObject[] medals01;
-    [SerializeField]
-    private GameObject[] medals02;
-    [SerializeField]
-    private GameObject[] medals03;
+    [Header("Arrays & Values")]
+    [SerializeField] private GameObject[] medals01;
+    [SerializeField] private GameObject[] medals02;
+    [SerializeField] private GameObject[] medals03;
+    [SerializeField] private GameObject blockLevel01;
+    [SerializeField] private GameObject blockLevel02;
+    [SerializeField] private GameObject blockLevel03;
+    [SerializeField] private Button buttonLevel01;
+    [SerializeField] private Button buttonLevel02;
+    [SerializeField] private Button buttonLevel03;
 
     #endregion
 

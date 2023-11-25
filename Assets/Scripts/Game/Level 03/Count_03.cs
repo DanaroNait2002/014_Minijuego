@@ -57,6 +57,7 @@ public class Count_03 : MonoBehaviour
 
         //Values
         count01 = 0;
+        count02 = 0;
         amount01 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().amount01;
         amount02 = GameObject.Find("MANAGER").GetComponent<Spawner_03>().amount02;
 
@@ -169,15 +170,10 @@ public class Count_03 : MonoBehaviour
             {
                 //Medals value keeps being 3 (no more medals)
                 ammountMedals = 3;
+            }
+            textEnd.text = ("¡Has ganado!");
 
-                textEnd.text = ("¡Has ganado! Ya puedes jugar el siguiente nivel");
-            }
-            else
-            {
-                //Retry button
-                retryButton.SetActive(true);
-                textEnd.text = ("¡Has ganado! Pero aún debes conseguir más medallas en este nivel");
-            }
+            retryButton.SetActive(true);
 
             //Medals value is saved
             PlayerPrefs.SetInt("AmmountMedals03", ammountMedals);
@@ -185,19 +181,19 @@ public class Count_03 : MonoBehaviour
             Destroy(this);
         }
 
+        else if (count01 == amount01 || count02 == amount02)
+        {
+            retryButton.SetActive(true);
+            textEnd.text = ("¡Que cerca! ¡Has acertado uno de los dos! Buen intento");
+
+            Destroy(this);
+        }
+
         else if (count01 >= amount01 - 2 && count01 <= amount01 + 2 || count02 >= amount01 - 2 && count02 <= amount01 + 2)
         {
-            if (count01 == amount01 || count02 == amount02)
-            {
-                textEnd.text = ("¡Que cerca! ¡Has acertado uno de los dos! Buen intento");
-
-            }
-            else
-            {
-                //So Close Game
-                textEnd.gameObject.SetActive(true);
-                textEnd.text = ("¡Que cerca! Buen intento");
-            }
+            //So Close Game
+            textEnd.gameObject.SetActive(true);
+            textEnd.text = ("¡Que cerca! Buen intento");
 
             //Retry Button
             retryButton.SetActive(true);
@@ -209,7 +205,7 @@ public class Count_03 : MonoBehaviour
         {
             //Lost Game
             textEnd.gameObject.SetActive(true);
-            textEnd.text = ("¡Has perdido! El número correcto era: " + amount01.ToString());
+            textEnd.text = ("¡Has perdido! Intenta contar con tus manos");
 
             //Retry Button
             retryButton.SetActive(true);

@@ -6,7 +6,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.FilePathAttribute;
 
 public class Spawner_01 : MonoBehaviour
 {
@@ -42,7 +41,7 @@ public class Spawner_01 : MonoBehaviour
     [SerializeField] private GameObject[] objectTypeStatic;
     [SerializeField] private GameObject instanteableStatic_01;
 
-    [Header("Bools")] //Bools 
+    [Header("Bools")]
     [SerializeField] private bool canSummon;
     [SerializeField] private bool startGame;
 

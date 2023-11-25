@@ -116,6 +116,29 @@ public class Count_02 : MonoBehaviour
         }
     }
 
+
+    public void Up()
+    {
+        //Number ++
+        count++;
+        textNumber.text = (count.ToString());
+    }
+
+    public void Down()
+    {
+        if (count == 0)
+        {
+            count = 0;
+        }
+        else
+        {
+            // Number--
+            count--;
+            textNumber.text = (count.ToString());
+        }
+    }
+
+
     public void Checker()
     {
         //Checker button is Disabled

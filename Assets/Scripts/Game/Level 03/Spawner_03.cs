@@ -44,6 +44,7 @@ public class Spawner_03 : MonoBehaviour
     [Header("Bools")] //Bools 
     [SerializeField] private bool canSummon;
     [SerializeField] private bool startGame;
+    [SerializeField] private bool duplicateCats;
 
     [Header("Public Variables")]
     [SerializeField] public int amount01;
@@ -73,6 +74,8 @@ public class Spawner_03 : MonoBehaviour
         value02 = Random.Range(0, objectTypeMoving.Length - 1);
         value03 = Random.Range(0, objectTypeMoving.Length - 1);
 
+        duplicateCats = true;
+
         //Bools Values
         startGame = false;
         canSummon = true;
@@ -84,132 +87,142 @@ public class Spawner_03 : MonoBehaviour
 
     private void Update()
     {
-        //Just in case
-        if (value02 == value01)
+        if (duplicateCats)
         {
-            //Randomizing Value again
-            value02 = Random.Range(0, objectTypeMoving.Length - 1);
-        }
-        //Just in case
-        if (value03 == value01 || value03 == value02)
-        {
-            value03 = Random.Range(0, objectTypeMoving.Length - 1);
-        }
-
-        //if the game is not set to start
-        if (!startGame)
-        {
-            //Timer is shown in the screen
-            textTimeStart.text = timerStart.ToString("0");
-
-            //While the timer is above the 0 value
-            if (timerStart >= 0)
+            //Just in case
+            if (value02 == value01)
             {
-                //The timer will be running
-                timerStart -= Time.deltaTime;
+                //Randomizing Value again
+                value02 = Random.Range(0, objectTypeMoving.Length - 1);
             }
-            //Once the timer is under the 0 value
-            else
+            //Just in case
+            if (value03 == value01 || value03 == value02)
             {
-                //The game will start
-                startGame = true;
-
-                //Canvas SetActive Change
-                canvasStart.SetActive(false);
-                canvasTimer.SetActive(true);
-                canvasEnd.SetActive(false);
-
-                //Timer is considered as 0
-                textTimeStart.text = "0";
-
-                //The cat shown in screen is destroyed
-                Destroy(instanteableStatic_01);
-                Destroy(instanteableStatic_02);
+                value03 = Random.Range(0, objectTypeMoving.Length - 1);
+            }
+            if (value02 != value01 && value03 != value01 && value03 != value02)
+            {
+                duplicateCats = false;
             }
         }
 
-        //If the game is set to start
-        if (startGame)
+        if (!duplicateCats)
         {
-            //Timer will start running
-            timerInGame -= Time.deltaTime;
-
-            //Timer is shown in the screen
-            textTimeInGame.text = timerInGame.ToString("0");
-
-            //While timer is above the 2.5 Value
-            if (timerInGame >= 2.5f)
+            //if the game is not set to start
+            if (!startGame)
             {
-                //Checking is the prevOrigin is the same as the current origin
-                if (origin == prevOrigin)
+                //Timer is shown in the screen
+                textTimeStart.text = timerStart.ToString("0");
+
+                //While the timer is above the 0 value
+                if (timerStart >= 0)
                 {
-                    //can't summon
-                    canSummon = false;
-
-                    //randomizing again
-                    origin = new Vector2(-10, Random.Range(-4, 4));
+                    //The timer will be running
+                    timerStart -= Time.deltaTime;
                 }
-                //if not
+                //Once the timer is under the 0 value
                 else
                 {
-                    //can summon
-                    canSummon = true;
-                }
+                    //The game will start
+                    startGame = true;
 
-                //if the game can summon
-                if (canSummon)
-                {
-                    //Cooldown timer start running
-                    timerCooldown += Time.deltaTime;
+                    //Canvas SetActive Change
+                    canvasStart.SetActive(false);
+                    canvasTimer.SetActive(true);
+                    canvasEnd.SetActive(false);
 
-                    //When the timer reach the cooldown Value
-                    if (timerCooldown >= cooldownValue)
-                    {
-                        valueRandom = Random.Range(0, 100);
+                    //Timer is considered as 0
+                    textTimeStart.text = "0";
 
-                        if (valueRandom % 2 == 0)
-                        {
-                            //Summon a cat
-                            Instantiate(objectTypeMoving[value01], origin, Quaternion.identity);
-                            //+1 cat summoned
-                            amount01++;
-                        }
-                        else if (valueRandom >= 50)
-                        {
-                            //Summon a cat
-                            Instantiate(objectTypeMoving[value02], origin, Quaternion.identity);
-                            //+1 cat summoned
-                            amount02++;
-                        }
-                        else
-                        {
-                            //Summon a cat
-                            Instantiate(objectTypeMoving[value03], origin, Quaternion.identity);
-                        }
-
-                        //change the prevOrigin Value
-                        prevOrigin = origin;
-
-                        //Randomizing new origin
-                        origin = new Vector2(-10, Random.Range(-4, 4));
-
-                        //Randomizing cooldown
-                        cooldownValue = Random.Range(minCooldown, maxCooldown);
-
-                        //Reseting Timer
-                        timerCooldown = 0;
-                    }
+                    //The cat shown in screen is destroyed
+                    Destroy(instanteableStatic_01);
+                    Destroy(instanteableStatic_02);
                 }
             }
-            //Once the Timer reach the 0 Value
-            else if (timerInGame <= 0f)
-            {
-                //Time stop showing
-                textTimeInGame.text = "0";
 
-                //The phase is considered ended
-                canvasEnd.SetActive(true);
-                canvasTimer.SetActive(false);
+            //If the game is set to start
+            if (startGame)
+            {
+                //Timer will start running
+                timerInGame -= Time.deltaTime;
+
+                //Timer is shown in the screen
+                textTimeInGame.text = timerInGame.ToString("0");
+
+                //While timer is above the 2.5 Value
+                if (timerInGame >= 2.5f)
+                {
+                    //Checking is the prevOrigin is the same as the current origin
+                    if (origin == prevOrigin)
+                    {
+                        //can't summon
+                        canSummon = false;
+
+                        //randomizing again
+                        origin = new Vector2(-10, Random.Range(-4, 4));
+                    }
+                    //if not
+                    else
+                    {
+                        //can summon
+                        canSummon = true;
+                    }
+
+                    //if the game can summon
+                    if (canSummon)
+                    {
+                        //Cooldown timer start running
+                        timerCooldown += Time.deltaTime;
+
+                        //When the timer reach the cooldown Value
+                        if (timerCooldown >= cooldownValue)
+                        {
+                            valueRandom = Random.Range(0, 100);
+
+                            if (valueRandom % 2 == 0 && valueRandom <= 50)
+                            {
+                                //Summon a cat
+                                Instantiate(objectTypeMoving[value01], origin, Quaternion.identity);
+                                //+1 cat summoned
+                                amount01++;
+                            }
+                            else if (valueRandom % 2 == 0 && valueRandom >= 50)
+                            {
+                                //Summon a cat
+                                Instantiate(objectTypeMoving[value02], origin, Quaternion.identity);
+                                //+1 cat summoned
+                                amount02++;
+                            }
+                            else
+                            {
+                                //Summon a cat
+                                Instantiate(objectTypeMoving[value03], origin, Quaternion.identity);
+                            }
+
+                            //change the prevOrigin Value
+                            prevOrigin = origin;
+
+                            //Randomizing new origin
+                            origin = new Vector2(-10, Random.Range(-4, 4));
+
+                            //Randomizing cooldown
+                            cooldownValue = Random.Range(minCooldown, maxCooldown);
+
+                            //Reseting Timer
+                            timerCooldown = 0;
+                        }
+                    }
+                }
+                //Once the Timer reach the 0 Value
+                else if (timerInGame <= 0f)
+                {
+                    //Time stop showing
+                    textTimeInGame.text = "0";
+
+                    //The phase is considered ended
+                    canvasEnd.SetActive(true);
+                    canvasTimer.SetActive(false);
+                }
             }
         }
     }
