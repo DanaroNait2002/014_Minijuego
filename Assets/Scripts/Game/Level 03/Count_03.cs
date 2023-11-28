@@ -149,6 +149,48 @@ public class Count_03 : MonoBehaviour
         }
     }
 
+    public void Up()
+    {
+        //Number ++
+        count01++;
+        textNumber01.text = (count01.ToString());
+    }
+
+    public void Down()
+    {
+        if (count01 == 0)
+        {
+            count01 = 0;
+        }
+        else
+        {
+            // Number--
+            count01--;
+            textNumber01.text = (count01.ToString());
+        }
+    }
+
+    public void W()
+    {
+        //Number ++
+        count02++;
+        textNumber02.text = (count02.ToString());
+    }
+
+    public void S()
+    {
+        if (count02 == 0)
+        {
+            count02 = 0;
+        }
+        else
+        {
+            // Number--
+            count02--;
+            textNumber02.text = (count02.ToString());
+        }
+    }
+
     public void Checker()
     {
         //Checker button is Disabled
@@ -183,6 +225,7 @@ public class Count_03 : MonoBehaviour
 
         else if (count01 == amount01 || count02 == amount02)
         {
+            textEnd.gameObject.SetActive(true);
             retryButton.SetActive(true);
             textEnd.text = ("¡Que cerca! ¡Has acertado uno de los dos! Buen intento");
 
@@ -193,7 +236,8 @@ public class Count_03 : MonoBehaviour
         {
             //So Close Game
             textEnd.gameObject.SetActive(true);
-            textEnd.text = ("¡Que cerca! Buen intento");
+
+            textEnd.text = ("¡Que cerca! ¡Has estado muy cerca de uno de los dos! Buen intento");
 
             //Retry Button
             retryButton.SetActive(true);
@@ -205,7 +249,7 @@ public class Count_03 : MonoBehaviour
         {
             //Lost Game
             textEnd.gameObject.SetActive(true);
-            textEnd.text = ("¡Has perdido! Intenta contar con tus manos");
+            textEnd.text = ("¡Has perdido! Prueba contar con tus manos");
 
             //Retry Button
             retryButton.SetActive(true);

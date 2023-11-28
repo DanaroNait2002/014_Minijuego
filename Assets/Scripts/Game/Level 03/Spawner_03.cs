@@ -80,9 +80,7 @@ public class Spawner_03 : MonoBehaviour
         startGame = false;
         canSummon = true;
 
-        //Actions
-        instanteableStatic_01 = Instantiate(objectTypeStatic[value01], new Vector2(-5f, 0f), Quaternion.identity);
-        instanteableStatic_02 = Instantiate(objectTypeStatic[value02], new Vector2(5f, 0f), Quaternion.identity);
+        
     }
 
     private void Update()
@@ -103,6 +101,10 @@ public class Spawner_03 : MonoBehaviour
             if (value02 != value01 && value03 != value01 && value03 != value02)
             {
                 duplicateCats = false;
+
+                //Actions
+                instanteableStatic_01 = Instantiate(objectTypeStatic[value01], new Vector2(-5f, 0f), Quaternion.identity);
+                instanteableStatic_02 = Instantiate(objectTypeStatic[value02], new Vector2(5f, 0f), Quaternion.identity);
             }
         }
 

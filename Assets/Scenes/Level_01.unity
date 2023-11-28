@@ -2519,7 +2519,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 980731714}
         m_TargetAssemblyTypeName: Count_01, Assembly-CSharp
-        m_MethodName: Update
+        m_MethodName: Down
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
